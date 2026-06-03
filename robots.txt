@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Block nothing — this is a public marketing site.
+Sitemap: https://thelocalbuilders.ca/sitemap.xml
