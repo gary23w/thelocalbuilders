@@ -74,20 +74,41 @@
     counters.forEach(function (el) { el.textContent = el.getAttribute('data-count') + (el.getAttribute('data-suffix') || ''); });
   }
 
-  /* ---------- gallery filter ---------- */
+  /* ---------- gallery filter + show more ---------- */
   var chips = document.querySelectorAll('.chip');
   var items = Array.prototype.slice.call(document.querySelectorAll('.gallery__item'));
+  var moreBtn = document.getElementById('galMore');
+  var COLLAPSE_LIMIT = 24;
+  var currentFilter = 'all';
+  var collapsed = true;
+  function applyView() {
+    var shown = 0;
+    items.forEach(function (item) {
+      var matches = currentFilter === 'all' || item.getAttribute('data-cat') === currentFilter;
+      var hide = !matches;
+      if (matches && currentFilter === 'all' && collapsed) {
+        shown++;
+        if (shown > COLLAPSE_LIMIT) hide = true;
+      }
+      item.classList.toggle('is-hidden', hide);
+    });
+    if (moreBtn) {
+      var relevant = currentFilter === 'all' && items.length > COLLAPSE_LIMIT;
+      moreBtn.hidden = !relevant;
+      moreBtn.textContent = collapsed ? ('Show all ' + items.length + ' projects') : 'Show fewer';
+    }
+  }
   chips.forEach(function (chip) {
     chip.addEventListener('click', function () {
       chips.forEach(function (c) { c.classList.remove('is-active'); c.setAttribute('aria-selected', 'false'); });
       chip.classList.add('is-active'); chip.setAttribute('aria-selected', 'true');
-      var f = chip.getAttribute('data-filter');
-      items.forEach(function (item) {
-        var show = f === 'all' || item.getAttribute('data-cat') === f;
-        item.classList.toggle('is-hidden', !show);
-      });
+      currentFilter = chip.getAttribute('data-filter');
+      collapsed = true;
+      applyView();
     });
   });
+  if (moreBtn) moreBtn.addEventListener('click', function () { collapsed = !collapsed; applyView(); });
+  applyView();
 
   /* ---------- lightbox ---------- */
   var lb = document.getElementById('lightbox');

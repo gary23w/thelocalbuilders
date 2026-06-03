@@ -541,6 +541,16 @@ p { margin: 0 0 1rem; }
 .contact__areas li { font-size: 0.78rem; color: rgba(255,255,255,0.72); border: 1px solid rgba(255,255,255,0.16); border-radius: 999px; padding: 0.28rem 0.7rem; }
 
 
+/* ---------- gallery show-more ---------- */
+.work__more {
+  margin: 1.5rem auto 0; display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--navy-deep); color: var(--white); border: 2px solid var(--navy-deep);
+  font-weight: 700; padding: 0.8rem 1.6rem; border-radius: 8px; font-size: 1rem;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+.work__more:hover { background: var(--navy); transform: translateY(-2px); }
+.work__more[hidden] { display: none; }
+
 /* ---------- a11y + reduced motion ---------- */
 :focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
 @media (prefers-reduced-motion: reduce) {
