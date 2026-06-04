@@ -189,7 +189,7 @@
   if (form) {
     var note = document.getElementById('quoteNote');
     var submit = document.getElementById('quoteSubmit');
-    var FALLBACK_EMAIL = 'gary@lfbuilders.ca';
+    var FALLBACK_EMAIL = 'localbuildermanager@gmail.com';
 
     function setNote(msg, cls) {
       note.textContent = msg;
